@@ -1,186 +1,70 @@
 {
-    "openapi": "3.1.0",
+    "openapi": "3.0.1",
     "info": {
-        "description": "This is the API Documentation",
-        "version": "1.0.0",
-        "title": "Test API",
-        "termsOfService": "none",
+        "title": "PASS-TECH Sample API",
+        "description": "API des différents modules PASS-TECH LIBS Backend",
+        "termsOfService": "",
         "contact": {
-            "email": "support@test.com"
-        }
+            "name": "PASS TECHNOLOGIE",
+            "url": "https://www.pass-tech.fr",
+            "email": "contact@pass-tech.fr"
+        },
+        "license": {
+            "name": "License PASS TECHNOLOGIE",
+            "url": ""
+        },
+        "version": "1.7"
+    },
+    "externalDocs": {
+        "description": "Documentation du projet",
+        "url": "https://doc.tech.fr/passtech-libs-documentation/"
     },
     "servers": [
         {
-            "url": "https://testserver:{port}/",
-            "description": "API server",
-            "variables": {
-                "port": {
-                    "enum": [
-                        "443"
-                    ],
-                    "default": "443"
-                }
-            }
+            "url": "http://localhost:4200",
+            "description": "Generated server url"
+        }
+    ],
+    "security": [
+        {
+            "Bearer token": []
         }
     ],
     "paths": {
-        "/fsps/{uri_test}/testendpoint": {
+        "/api/chart/count/users": {
             "get": {
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
                 "tags": [
-                    "test endpoint"
+                    "public-user-resource"
                 ],
-                "summary": "get testendpoint",
+                "description": "Count users",
+                "operationId": "countUsers",
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Successful Operation",
                         "content": {
-                            "application/vnd.test.api+json; version=v1": {
+                            "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/getTestendpointArrayResponse"
+                                    "type": "string"
                                 }
                             }
                         }
                     },
-                    "default": {
-                        "description": "error",
-                        "content": {
-                            "application/vnd.test.api+json; version=v1": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/errors"
-                                }
-                            }
-                        }
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "401": {
+                        "description": "Authentication Failure"
                     }
-                },
-                "parameters": [
-                    {
-                        "name": "uri_test",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ]
+                }
             }
         }
     },
     "components": {
-        "schemas": {
-            "errors": {
-                "type": "object",
-                "required": [
-                    "httpId",
-                    "httpStatus",
-                    "status",
-                    "request",
-                    "at",
-                    "error"
-                ],
-                "additionalProperties": { "type": "integer" },
-                "patternProperties": {
-                  "S_": { "type": "integer" }
-                },
-                "properties": {
-                    "httpId": {
-                        "type": "integer"
-                    },
-                    "httpStatus": {
-                        "type": "string"
-                    },
-                    "status": {
-                        "type": "string"
-                    },
-                    "request": {
-                        "type": "string"
-                    },
-                    "at": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "error": {
-                        "type": "object",
-                        "required": [
-                            "number",
-                            "message"
-                        ],
-                        "properties": {
-                            "number": {
-                                "type": "integer"
-                            },
-                            "message": {
-                                "type": "string"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                }
-            },
-            "getTestendpointArrayResponse": {
-                "type": "object",
-                "required": [
-                    "httpId",
-                    "httpStatus",
-                    "status",
-                    "request",
-                    "at",
-                    "bizdates"
-                ],
-                "properties": {
-                    "httpId": {
-                        "type": "integer"
-                    },
-                    "httpStatus": {
-                        "type": "string"
-                    },
-                    "status": {
-                        "type": "string"
-                    },
-                    "request": {
-                        "type": "string"
-                    },
-                    "at": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "test": {
-                        "type": "object",
-                        "required": [
-                            "testdate",
-                            "testInt",
-                            "testdate2"
-                        ],
-                        "properties": {
-                            "testdate": {
-                                "type": "string",
-                                "format": "date",
-                                "nullable": true
-                            },
-                            "testInt": {
-                                "type": [
-                                    "integer",
-                                    "null"
-                                ]
-                            },
-                            "testdate2": {
-                                "type": "string",
-                                "format": "date"
-                            }
-                        }
-                    }
-                },
-                "additionalProperties": false
-            }
-        },
         "securitySchemes": {
-            "basicAuth": {
+            "Bearer token": {
                 "type": "http",
-                "scheme": "basic"
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         }
     }

@@ -1,5 +1,5 @@
 # OpenAPI Explorer
-Web Component Custom Element for Open-API spec viewing, with automatic integration for React and Vue.
+Web Component Custom Element for Open-API spec viewing, with automatic integration for React, Vue and Angular !.
 
 <p align="center">
     <a href="./LICENSE" alt="apache 2.0 license">
@@ -24,6 +24,14 @@ Web Component Custom Element for Open-API spec viewing, with automatic integrati
     <img src="./docs/desktop-view.png" alt="Desktop demo image" width="800px">
   </a>
 </p>
+
+
+This version "@passtech/openapi-explorer" include a a select button for each operation to integrate OpenAPI Explorer in another application 
+
+<p>
+    <img src="./docs/OpenApiExplorer-SelectOperation.png" alt="Select operation" width="800px">
+</p>
+
 
 ## Check out the Demo
 [OpenAPI Explorer Demo](https://rhosys.github.io/openapi-explorer/#?route=get-/v1/users/-userId-/resources/-resourceUri-/permissions/-permission-)

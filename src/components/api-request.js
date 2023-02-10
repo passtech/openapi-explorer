@@ -76,7 +76,7 @@ export default class ApiRequest extends LitElement {
       <div class=" ${this.callback === 'true' ? 'tiny-title' : 'req-res-title'} "> 
         ${this.callback === 'true' ? 'CALLBACK REQUEST' : getI18nText('operations.request')}
       </div>
-      <div>
+      <div class="d-flex">
         ${this.inputParametersTemplate('path')}
         ${this.inputParametersTemplate('query')}
         ${this.requestBodyTemplate()}
@@ -774,8 +774,19 @@ export default class ApiRequest extends LitElement {
           : ''
       }
       <button class="m-btn primary btn-execute thin-border" part="btn btn-fill btn-try" @click="${this.onTryClick}">${getI18nText('operations.execute')}</button>
+      ${this.apiSelect()}
     </div>
     ${this.responseMessage === '' ? '' : this.apiResponseTabTemplate()}
+    `;
+  }
+
+  /**
+   * Selection de l'API
+   * @returns
+   */
+  apiSelect() {
+    return html`
+      <button #selectRequestButton class="m-btn primary btn-execute thin-border" style="margin-left: 4px" part="btn btn-fill btn-try" @click="${this.onSelect}">${getI18nText('operations.select')}</button>
     `;
   }
   /* eslint-enable indent */
@@ -787,6 +798,42 @@ export default class ApiRequest extends LitElement {
 
     const event = { bubbles: true, composed: true, detail: { explorerLocation: this.elementId, type: 'RequestCleared' } };
     this.dispatchEvent(new CustomEvent('event', event));
+  }
+
+  /**
+   * Select a request and send an event for host application
+   */
+  onSelect() {
+    const requestPanelEl = this.closest('.request-panel');
+    const pathParamEls = [...requestPanelEl.querySelectorAll("[data-ptype='path']")];
+    
+    let pathUrl = `${this.serverUrl.replace(/\/$/, '')}${this.path.replaceAll(' ', '')}`;
+
+    // Generate URL using Path Params
+    pathParamEls.map((el) => {
+      pathUrl = pathUrl.replace(`{${el.dataset.pname}}`, encodeURIComponent(el.value) || '-');
+    });
+
+    // Handle relative serverUrls
+    if (!pathUrl.startsWith('http')) {
+      const newUrl = new URL(pathUrl, window.location.href);
+      pathUrl = newUrl.toString();
+    }
+
+    // Select endpoint h2 shortSummary
+    const closestEndpointContainer = this.closest('.expanded-endpoint-body');
+    const descriptionTag = closestEndpointContainer.getElementsByTagName('h2')[0];
+    let description = '';
+    if (descriptionTag !== undefined) {
+      description = descriptionTag.textContent;
+    }
+    window.dispatchEvent(new CustomEvent('select-request', {
+      detail: {
+        method: this.method.toUpperCase(),
+        endpoint: pathUrl,
+        description
+      }
+    }));
   }
 
   async onTryClick() {

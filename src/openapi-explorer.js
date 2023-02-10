@@ -423,6 +423,12 @@ export default class OpenApiExplorer extends LitElement {
       this.scrollTo(getCurrentElement());
     }, true);
     this.handleResize();
+
+    // Listen
+    window.addEventListener('select-request', (event) => {
+      // eslint-disable-next-line no-console
+      console.log(event);
+    });
   }
 
   // Cleanup

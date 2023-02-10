@@ -42,6 +42,7 @@ export default {
       'clear': 'VIDER',
       'clear-response': 'VIDER LA RÉPONSE',
       'execute': 'EXÉCUTER',
+      'select': 'SELECTIONNER CETTE REQUETE',
       'response': 'RÉPONSE',
       'response-headers': 'EN-TÊTES DE LA RÉPONSE',
       'example': 'EXEMPLE',

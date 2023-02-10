@@ -1,6 +1,6 @@
 {
-  "name": "openapi-explorer",
-  "version": "0.0.0",
+  "name": "@passtech/openapi-explorer",
+  "version": "1.0.7",
   "description": "OpenAPI Explorer - API viewer with dynamically generated components, documentation, and interaction console",
   "author": "Rhosys Developers <developers@rhosys.ch>",
   "type": "module",
@@ -9,6 +9,9 @@
     "url": "https://github.com/Rhosys/openapi-explorer.git"
   },
   "license": "Apache-2.0",
+  "publishConfig": {
+    "registry": "https://rct-nexus.tech.fr/repository/npm-passtech/"
+  },
   "keywords": [
     "OpenAPI",
     "OpenAPI Specification",
@@ -68,7 +71,7 @@
     "build:umd:browser": "NODE_ENV=production BABEL_ENV=browser webpack --mode=production --progress --config webpack.config.js",
     "build:commonjs": "NODE_ENV=production BABEL_ENV=commonjs babel src --out-dir dist/lib",
     "build:es": "NODE_ENV=production BABEL_ENV=es babel src --out-dir dist/es",
-    "start": "webpack serve --mode=development --port=8080",
+    "start": "webpack serve --mode=development --port=39851",
     "serve": "serve -p 8080 mocks",
     "site": "serve -p 8080 site",
     "lint": "eslint --ext .js src",

@@ -123,13 +123,16 @@ export function getCurrentElement() {
   return decodeURIComponent(query.get('route') || '');
 }
 
+/**
+ * No replace state
+ */
 export function replaceState(rawElementId) {
-  const elementId = rawElementId && rawElementId.replace(/^#/, '') || '';
+  // const elementId = rawElementId && rawElementId.replace(/^#/, '') || '';
 
-  const currentNavigationHashPart = (window.location.hash || '').split('?')[0].replace(/^#/, '');
-  const currentQuery = (window.location.hash || '').split('?')[1];
-  const query = new URLSearchParams(currentQuery);
-  query.delete('route');
-  const newQuery = query.toString().length > 1 ? `${query.toString()}&route=${elementId}` : `route=${elementId}`;
-  window.history.replaceState(null, null, `#${currentNavigationHashPart}?${newQuery}`);
+  // const currentNavigationHashPart = (window.location.hash || '').split('?')[0].replace(/^#/, '');
+  // const currentQuery = (window.location.hash || '').split('?')[1];
+  // const query = new URLSearchParams(currentQuery);
+  // query.delete('route');
+  // const newQuery = query.toString().length > 1 ? `${query.toString()}&route=${elementId}` : `route=${elementId}`;
+  // window.history.replaceState(null, null, `#${currentNavigationHashPart}?${newQuery}`);
 }

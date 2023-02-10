@@ -42,6 +42,7 @@ export default {
       'clear': 'CLEAR',
       'clear-response': 'CLEAR RESPONSE',
       'execute': 'EXECUTE',
+      'select': 'SELECT THIS REQUEST',
       'response': 'RESPONSE',
       'response-headers': 'RESPONSE HEADERS',
       'example': 'EXAMPLE',

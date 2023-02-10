@@ -57,7 +57,7 @@ function endpointHeadTemplate(path) {
     <div class="method ${path.method}"> ${path.method} </div> 
     <div style="${path.deprecated ? 'text-decoration: line-through;' : ''}">
       ${this.usePathInNavBar === 'true'
-        ? html`<div class="path">${path.path.split('/').filter(t => t.trim()).map(t => html`<span>/${t}</span>`)}</div>`
+        ? html`<div class="path">${path.path}</div>`
         : html`<div class="">${path.summary || path.shortSummary}</div>`
       }
       ${path.isWebhook ? html`<span style="color:var(--primary-color)"> (Webhook) </span>` : ''}
